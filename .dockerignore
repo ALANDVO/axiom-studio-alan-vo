@@ -1,0 +1,15 @@
+.git
+.venv
+node_modules
+dist
+build
+__pycache__
+*.pyc
+.pytest_cache
+.coverage
+.env
+*.db
+*.sqlite
+*.sqlite3
+.antigravitycli
+.omp

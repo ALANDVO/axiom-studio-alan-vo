@@ -1,0 +1,26 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+
+# Databases / Environment / Secrets
+.env
+*.db
+*.sqlite
+*.sqlite3
+
+# Agent / Tool metadata
+.antigravitycli/
+.omp/

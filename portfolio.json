@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "name": "axiom-studio-alan-vo",
+  "version": "1.0.0",
+  "owner": "ALANDVO",
+  "email": "alanvo@gmail.com",
+  "domain": "AI/ML developer tools",
+  "summary": "Work in progress: axiom-studio-alan-vo",
+  "workflows": [
+    "Live spatial intelligence telemetry ingestion and multi-source orbital, aerial, and camera tracking",
+    "Geospatial anomaly detection and ML trajectory evaluation benchmark",
+    "Deterministic analyst workflow macro synthesis and routine execution with drift demotion"
+  ],
+  "auth": "oidc-keycloak-saml-broker",
+  "llm_providers": [
+    "openai-compatible",
+    "anthropic",
+    "gemini",
+    "ollama"
+  ],
+  "status": "work-in-progress"
+}
