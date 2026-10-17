@@ -76,3 +76,36 @@ def test_admin_audit_log_query(client, admin_token, analyst_token):
     admin_res = client.get("/api/audit/logs", headers=admin_headers)
     assert admin_res.status_code == 200
     assert isinstance(admin_res.json(), list)
+
+
+def test_advisory_context_filtering(client, analyst_token):
+    """Advisory endpoint must filter context entities by target_entity_id and honor include_sensor_context."""
+    headers = {"Authorization": f"Bearer {analyst_token}"}
+
+    # When include_sensor_context is False, no entities should reach the advisory engine
+    no_ctx_res = client.post(
+        "/api/ml/advisory",
+        json={"query": "What is happening?", "include_sensor_context": False},
+        headers=headers,
+    )
+    assert no_ctx_res.status_code == 200
+    no_ctx_data = no_ctx_res.json()
+    assert no_ctx_data["grounding_entities"] == []
+    assert "0 analyzed" in no_ctx_data["summary"]
+
+    # When target_entity_id is provided, only that entity should be in the grounding set
+    entities_res = client.get("/api/spatial/entities", headers=headers)
+    entities = entities_res.json()
+    assert len(entities) > 0
+    target_id = entities[0]["id"]
+
+    targeted_res = client.post(
+        "/api/ml/advisory",
+        json={"query": "Tell me about this contact", "target_entity_id": target_id},
+        headers=headers,
+    )
+    assert targeted_res.status_code == 200
+    targeted_data = targeted_res.json()
+    assert len(targeted_data["grounding_entities"]) == 1
+    assert targeted_data["grounding_entities"][0] == target_id
+    assert "1 analyzed" in targeted_data["summary"]

@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { BookmarksTray } from '../components/BookmarksTray';
 import { AnomalyConsole } from '../components/AnomalyConsole';
 import { MacroAssistant } from '../components/MacroAssistant';
-import { Bookmark, MLBenchmarkResponse } from '../types';
+import { AdvisoryResponse, Bookmark, MLBenchmarkResponse } from '../types';
 
 describe('User-visible workflows and components', () => {
   it('renders favourite bookmarks tray and triggers fly-to callback (Issue #335)', () => {
@@ -105,7 +105,7 @@ describe('User-visible workflows and components', () => {
         macros={[]}
         onConfirmMacro={onConfirm}
         onExecuteMacro={vi.fn().mockResolvedValue(undefined)}
-        onAskAdvisory={vi.fn().mockResolvedValue({} as any)}
+        onAskAdvisory={vi.fn().mockResolvedValue({} as AdvisoryResponse)}
         canManage={true}
       />
     );

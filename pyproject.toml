@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "axiom-studio-alan-vo"
-version = "1.0.0"
+version = "1.0.1"
 description = "Live open source spatial intelligence simulator and ML trajectory anomaly evaluation platform on a photorealistic 3D globe."
 readme = "README.md"
 authors = [
