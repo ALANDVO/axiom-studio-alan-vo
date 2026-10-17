@@ -4,13 +4,14 @@ import { UserProfile } from '../types';
 
 interface HeaderProps {
   user: UserProfile | null;
+  version: string | null;
   onRoleChange: (role: 'viewer' | 'analyst' | 'admin') => void;
   onRefresh: () => void;
   isRefreshing: boolean;
 }
-
 export const Header: React.FC<HeaderProps> = ({
   user,
+  version,
   onRoleChange,
   onRefresh,
   isRefreshing,
@@ -37,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center space-x-2">
             <span className="font-bold text-lg tracking-wider text-sky-300">AXIOM STUDIO</span>
             <span className="text-xs px-2 py-0.5 rounded bg-sky-950 border border-sky-800 text-sky-400 font-mono">
-              v1.0.0
+              v{version ?? '—'}
             </span>
           </div>
           <p className="text-xs text-slate-400">
@@ -69,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="text-slate-400">Role: </span>
               <select
                 value={user.roles[0] || 'viewer'}
-                onChange={(e) => onRoleChange(e.target.value as any)}
+                onChange={(e) => onRoleChange(e.target.value as 'viewer' | 'analyst' | 'admin')}
                 className="bg-slate-900 border border-slate-700 rounded px-1.5 py-0.5 text-xs text-sky-300 font-medium focus:outline-none"
               >
                 <option value="viewer">Viewer (Read-only)</option>

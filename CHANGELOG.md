@@ -1,10 +1,15 @@
 # Changelog
 
-## 1.0.0 — work-in-progress checkpoint
+## 1.1.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
 
 All notable changes to this project will be documented in this file.
+
+## [1.0.1] - 2026-10-17
+
+### Fixed
+- ML advisory endpoint now honors `target_entity_id` to filter context to a single selected telemetry contact, and respects `include_sensor_context=false` to omit entity context entirely. Frontend client and dashboard pass the currently selected entity ID to the advisory assistant.
 
 ## [1.0.0] - 2026-10-12
 

@@ -91,4 +91,8 @@ async def request_advisory_analysis(
     """Produce grounded advisory spatial intelligence assessment (deterministic offline fallback if LLM key unset)."""
     entities = spatial_engine.get_live_entities(limit=20)
     context_data = [e.model_dump() for e in entities]
+    if not req.include_sensor_context:
+        context_data = []
+    elif req.target_entity_id:
+        context_data = [e for e in context_data if e.get("id") == req.target_entity_id]
     return await llm_advisory_service.get_advisory(req, context_data)

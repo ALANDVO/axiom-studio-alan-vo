@@ -167,6 +167,14 @@ export interface UserProfile {
   is_demo: boolean;
 }
 
+export interface HealthResponse {
+  status: string;
+  application: string;
+  version: string;
+  environment: string;
+  demo_mode: string;
+}
+
 export interface TokenResponse {
   access_token: string;
   token_type: string;

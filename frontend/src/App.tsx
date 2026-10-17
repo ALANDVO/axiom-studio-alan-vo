@@ -20,6 +20,7 @@ import {
 
 export const App: React.FC = () => {
   const [user, setUser] = useState<UserProfile | null>(null);
+  const [version, setVersion] = useState<string | null>(null);
   const [entities, setEntities] = useState<SpatialEntity[]>([]);
   const [selectedEntity, setSelectedEntity] = useState<SpatialEntity | null>(null);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
@@ -38,11 +39,13 @@ export const App: React.FC = () => {
     (async () => {
       try {
         setIsLoading(true);
+        const health = await api.getHealth();
+        setVersion(health.version);
         await authService.loginDemo('analyst');
         setUser(authService.getCurrentUser());
         await loadData();
-      } catch (err: any) {
-        setErrorMessage(err.message || 'Initialization error');
+      } catch (err: unknown) {
+        setErrorMessage(err instanceof Error ? err.message : 'Initialization error');
       } finally {
         setIsLoading(false);
       }
@@ -64,8 +67,8 @@ export const App: React.FC = () => {
       setBenchmark(bench);
       const cands = await api.getMacroCandidates(1).catch(() => []);
       setCandidates(cands);
-    } catch (err: any) {
-      setErrorMessage(err.message || 'Failed to refresh telemetry');
+    } catch (err: unknown) {
+      setErrorMessage(err instanceof Error ? err.message : 'Failed to refresh telemetry');
     } finally {
       setIsRefreshing(false);
     }
@@ -76,8 +79,8 @@ export const App: React.FC = () => {
       await authService.loginDemo(role);
       setUser(authService.getCurrentUser());
       await loadData();
-    } catch (err: any) {
-      setErrorMessage(err.message || 'Role change failed');
+    } catch (err: unknown) {
+      setErrorMessage(err instanceof Error ? err.message : 'Role change failed');
     }
   };
 
@@ -111,7 +114,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col text-slate-100 font-sans">
-      <Header user={user} onRoleChange={handleRoleChange} onRefresh={loadData} isRefreshing={isRefreshing} />
+      <Header user={user} version={version} onRoleChange={handleRoleChange} onRefresh={loadData} isRefreshing={isRefreshing} />
       {errorMessage && (
         <div className="bg-rose-950 border-b border-rose-800 text-rose-200 px-6 py-2 text-xs font-mono flex justify-between">
           <span>SYSTEM ERROR: {errorMessage}</span>
@@ -133,7 +136,7 @@ export const App: React.FC = () => {
             <AnomalyConsole anomalies={anomalies} benchmark={benchmark} onRunScan={async () => { setIsScanning(true); try { setAnomalies(await api.detectAnomalies(0.65)); } finally { setIsScanning(false); } }} onRunBenchmark={async () => setBenchmark(await api.getMLBenchmark(0.65))} isScanning={isScanning} canScan={canEdit} />
           </div>
           <div className="min-h-[240px]">
-            <MacroAssistant candidates={candidates} macros={macros} onConfirmMacro={async (c) => { const m = await api.confirmMacro(c.suggested_name, 'Compiled shortcut', c.context_fingerprint, c.actions); setMacros([m, ...macros]); setCandidates(candidates.filter((x) => x.suggested_name !== c.suggested_name)); }} onExecuteMacro={async (id) => { const res = await api.executeMacro(id); if (!res.success && res.demoted) setMacros(await api.getMacros()); }} onAskAdvisory={(q) => api.requestAdvisory(q)} canManage={canEdit} />
+            <MacroAssistant candidates={candidates} macros={macros} onConfirmMacro={async (c) => { const m = await api.confirmMacro(c.suggested_name, 'Compiled shortcut', c.context_fingerprint, c.actions); setMacros([m, ...macros]); setCandidates(candidates.filter((x) => x.suggested_name !== c.suggested_name)); }} onExecuteMacro={async (id) => { const res = await api.executeMacro(id); if (!res.success && res.demoted) setMacros(await api.getMacros()); }} onAskAdvisory={(q) => api.requestAdvisory(q, { target_entity_id: selectedEntity?.id })} canManage={canEdit} />
           </div>
         </div>
       </main>

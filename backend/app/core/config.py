@@ -16,7 +16,7 @@ class Settings(BaseSettings):
 
     # Core environment
     app_name: str = "Axiom Studio"
-    version: str = "1.0.0"
+    version: str = "1.0.1"
     environment: str = Field(default="development", alias="ENVIRONMENT")
     host: str = Field(default="127.0.0.1", alias="HOST")
     port: int = Field(default=8000, alias="PORT")

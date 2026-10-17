@@ -3,7 +3,7 @@
 > Work in progress. This checkpoint may be incomplete or fail tests. See PLAN.md and STATUS.md before use.
 
 
-Current version: 1.0.0.
+Current version: 1.0.1.
 
 Axiom Studio addresses the challenge of analyzing disparate real-world spatial sensor feeds in real time without proprietary software stacks or prohibitive hardware overhead. By unifying Keplerian orbital satellite propagation, ADS-B commercial flight kinematic vectors, ground-based radio frequency (RF) monitors, and public traffic camera feeds with automated health polling onto an interactive 3D globe simulator, the system provides analysts and researchers with an open-source spatial intelligence operating picture. A deterministic machine learning trajectory anomaly engine evaluates anomalous maneuvers, emergency descents, and transponder spoofing across multi-source spatio-temporal streams, while a deterministic workflow synthesis engine compiles repeated analyst routines into verifiable shortcuts.
 
@@ -123,7 +123,7 @@ Axiom Studio uses Keycloak for OpenID Connect (OIDC) authorization-code authenti
 - `DELETE /api/spatial/bookmarks/{id}` — Remove a saved favourite location.
 - `POST /api/ml/detect-anomalies` — Run ML kinematic anomaly detector over active tracks.
 - `GET /api/ml/benchmark` — Return benchmark evaluation metrics against ground-truth dataset.
-- `POST /api/ml/advisory` — Request grounded advisory analysis from configured LLM adapter.
+- `POST /api/ml/advisory` — Request grounded advisory analysis from configured LLM adapter; supports optional `target_entity_id` to scope context to one telemetry contact and `include_sensor_context` (default `true`).
 - `POST /api/macros/receipts` — Record plain-data action receipt for routine learning.
 - `GET /api/macros/candidates` — Mine frequent repeated action sequences.
 - `POST /api/macros/confirm` — Save confirmed workflow macro shortcut.

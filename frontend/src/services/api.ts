@@ -2,12 +2,14 @@
  * Typed HTTP API client communicating with FastAPI backend.
  */
 import {
+  ActionItem,
   ActionReceipt,
   AdvisoryResponse,
   AnomalyScore,
   Bookmark,
   BookmarkCreate,
   CameraFeed,
+  HealthResponse,
   MacroCandidate,
   MacroExecuteResult,
   MLBenchmarkResponse,
@@ -50,6 +52,11 @@ class ApiClient {
     }
 
     return response.json();
+  }
+
+  // Service health and version metadata
+  async getHealth(): Promise<HealthResponse> {
+    return this.request<HealthResponse>('/api/health');
   }
 
   // Auth endpoints
@@ -124,10 +131,17 @@ class ApiClient {
     return this.request<MLBenchmarkResponse>(`/api/ml/benchmark?threshold=${threshold}`);
   }
 
-  async requestAdvisory(query: string): Promise<AdvisoryResponse> {
+  async requestAdvisory(
+    query: string,
+    opts?: { target_entity_id?: string; include_sensor_context?: boolean },
+  ): Promise<AdvisoryResponse> {
     return this.request<AdvisoryResponse>('/api/ml/advisory', {
       method: 'POST',
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({
+        query,
+        target_entity_id: opts?.target_entity_id,
+        include_sensor_context: opts?.include_sensor_context,
+      }),
     });
   }
 
@@ -143,7 +157,7 @@ class ApiClient {
     return this.request<MacroCandidate[]>(`/api/macros/candidates?min_support=${minSupport}`);
   }
 
-  async confirmMacro(name: string, description: string, triggerContext: string, actions: any[]): Promise<WorkflowMacro> {
+  async confirmMacro(name: string, description: string, triggerContext: string, actions: ActionItem[]): Promise<WorkflowMacro> {
     return this.request<WorkflowMacro>('/api/macros/confirm', {
       method: 'POST',
       body: JSON.stringify({
