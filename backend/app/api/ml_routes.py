@@ -35,12 +35,21 @@ def detect_trajectory_anomalies(
         if target_ids and e.id not in target_ids:
             continue
 
+        # Stationary entities (cameras, rf_stations) have zero climb and course deviation by definition
+        if e.entity_type in ("camera", "rf_station"):
+            climb_mps = 0.0
+            course_dev_deg = 0.0
+        else:
+            # For moving entities, use small defaults (real-time telemetry would provide actuals)
+            climb_mps = 0.0
+            course_dev_deg = 0.1
+
         score_val, patterns = anomaly_detector.score_kinematics(
             entity_type=e.entity_type,
             vel_mps=e.velocity,
             alt_m=e.altitude,
-            climb_mps=0.0,
-            course_dev_deg=0.1,
+            climb_mps=climb_mps,
+            course_dev_deg=course_dev_deg,
         )
 
         is_anom = score_val >= payload.threshold

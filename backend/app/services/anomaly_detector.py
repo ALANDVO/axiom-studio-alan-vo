@@ -9,8 +9,8 @@ from app.models.schemas import BenchmarkMetric, MLBenchmarkResponse
 DOMAIN_PROFILES = {
     "satellite": {"v": (7600.0, 150.0), "a": (550000.0, 150000.0), "c": (0.05, 0.02), "cl": (0.0, 5.0)},
     "aircraft": {"v": (240.0, 35.0), "a": (10500.0, 1500.0), "c": (0.5, 0.4), "cl": (0.0, 8.0)},
-    "rf_station": {"v": (0.0, 0.1), "a": (100.0, 50.0), "c": (0.0, 0.01), "cl": (0.0, 0.01)},
-    "camera": {"v": (0.0, 0.0), "a": (20.0, 10.0), "c": (0.0, 0.0), "cl": (0.0, 0.0)},
+    "rf_station": {"v": (0.0, 0.1), "a": (100.0, 50.0), "c": (0.0, 0.1), "cl": (0.0, 0.1)},
+    "camera": {"v": (0.0, 0.1), "a": (20.0, 10.0), "c": (0.0, 0.1), "cl": (0.0, 0.1)},
 }
 
 BENCHMARK_DATASET: List[Dict[str, Any]] = [
