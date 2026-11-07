@@ -30,3 +30,7 @@ All notable changes to this project will be documented in this file.
 - Deterministic analyst workflow macro synthesizer supporting plain-data action receipts, candidate detection, and drift demotion.
 - Secure Keycloak OIDC authentication with PKCE, SAML brokering architecture, and role-based access control (viewer, analyst, admin).
 - Offline-first deterministic core with optional advisory LLM integration supporting OpenAI, Anthropic, Gemini, and Ollama.
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

@@ -54,3 +54,6 @@ Acceptance:
 - Bidirectional voice commanding via Gemini Live and Whisper/Ollama local models
 - Hands-free camera fly-to and entity investigation speech tools
 
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

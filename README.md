@@ -179,3 +179,7 @@ docker compose up -d
 
 Author: Alan Vo (<alanvo@gmail.com>)
 License: MIT
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)
