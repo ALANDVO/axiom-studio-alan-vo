@@ -40,11 +40,15 @@ Tests: `backend/tests/test_ml_anomaly.py`
 
 ### sonde-rf-hardware-sdr — Hardware SDR and SondeHub Web Receiver Integration
 
-Status: planned
+Status: in_progress
 
 Acceptance:
 - Local USB WebUSB/WebAudio SDR receiver direct streaming for ADS-B and FM broadcast
 - Direct SondeHub radiosonde telemetry layer with balloon flight prediction vectors
+
+Implementation: `backend/app/api/sdr_routes.py`, `backend/app/main.py (router inclusion)`
+
+Tests: `Manual API verification: /api/sdr/config, /api/sdr/start, /api/sdr/stop`, `Manual API verification: /api/sdr/ads-b/aircraft, /api/sdr/fm/stations, /api/sdr/sondehub/status`
 
 ### voice-multimodal-hud — Multimodal Voice Assistant and Speech-to-Text Navigation
 

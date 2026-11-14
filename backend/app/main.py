@@ -9,6 +9,7 @@ from app.api.auth_routes import router as auth_router
 from app.api.macro_routes import router as macro_router
 from app.api.ml_routes import router as ml_router
 from app.api.spatial_routes import router as spatial_router
+from app.api.sdr_routes import router as sdr_router
 from app.core.config import settings
 from app.models.database import init_db
 
@@ -70,6 +71,8 @@ def create_app() -> FastAPI:
     application.include_router(spatial_router)
     application.include_router(ml_router)
     application.include_router(macro_router)
+    application.include_router(sdr_router)
+    application.include_router(sdr_router)
     application.include_router(audit_router)
 
     return application
