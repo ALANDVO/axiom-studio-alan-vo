@@ -55,10 +55,18 @@
     {
       "id": "sonde-rf-hardware-sdr",
       "title": "Hardware SDR and SondeHub Web Receiver Integration",
-      "status": "planned",
+      "status": "in_progress",
       "acceptance": [
         "Local USB WebUSB/WebAudio SDR receiver direct streaming for ADS-B and FM broadcast",
         "Direct SondeHub radiosonde telemetry layer with balloon flight prediction vectors"
+      ],
+      "implementation": [
+        "backend/app/api/sdr_routes.py",
+        "backend/app/main.py (router inclusion)"
+      ],
+      "tests": [
+        "Manual API verification: /api/sdr/config, /api/sdr/start, /api/sdr/stop",
+        "Manual API verification: /api/sdr/ads-b/aircraft, /api/sdr/fm/stations, /api/sdr/sondehub/status"
       ]
     },
     {
