@@ -140,7 +140,7 @@ async def set_frequency(frequency_mhz: float) -> Dict[str, str]:
     """Set the SDR receiver tuning frequency in MHz."""
     try:
         sdr_state.set_frequency(frequency_mhz)
-        return {"status": "ok", "frequency_mhz": frequency_mhz}
+        return {"status": "ok", "frequency_mhz": str(frequency_mhz)}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 

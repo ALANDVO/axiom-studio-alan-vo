@@ -3,7 +3,7 @@
 > Work in progress. This checkpoint may be incomplete or fail tests. See PLAN.md and STATUS.md before use.
 
 
-Current version: 1.0.1.
+Current version: `1.6.0`.
 
 Axiom Studio addresses the challenge of analyzing disparate real-world spatial sensor feeds in real time without proprietary software stacks or prohibitive hardware overhead. By unifying Keplerian orbital satellite propagation, ADS-B commercial flight kinematic vectors, ground-based radio frequency (RF) monitors, and public traffic camera feeds with automated health polling onto an interactive 3D globe simulator, the system provides analysts and researchers with an open-source spatial intelligence operating picture. A deterministic machine learning trajectory anomaly engine evaluates anomalous maneuvers, emergency descents, and transponder spoofing across multi-source spatio-temporal streams, while a deterministic workflow synthesis engine compiles repeated analyst routines into verifiable shortcuts.
 
