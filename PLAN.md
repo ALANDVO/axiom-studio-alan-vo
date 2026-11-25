@@ -40,7 +40,7 @@ Tests: `backend/tests/test_ml_anomaly.py`
 
 ### sonde-rf-hardware-sdr — Hardware SDR and SondeHub Web Receiver Integration
 
-Status: in_progress
+Status: done
 
 Acceptance:
 - Local USB WebUSB/WebAudio SDR receiver direct streaming for ADS-B and FM broadcast
