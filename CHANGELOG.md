@@ -1,6 +1,18 @@
 # Changelog
 
+## 1.7.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.6.0 — work-in-progress checkpoint
+## [1.7.0] - 2026-11-25
+
+### Added
+- Hardware SDR and SondeHub Web Receiver Integration (sonde-rf-hardware-sdr):
+  - Local USB WebUSB/WebAudio SDR receiver direct streaming for ADS-B and FM broadcast
+  - Direct SondeHub radiosonde telemetry layer with balloon flight prediction vectors
+  - API endpoints: /api/sdr/config, /api/sdr/start, /api/sdr/stop, /api/sdr/set-frequency, /api/sdr/set-mode, /api/sdr/ads-b/aircraft, /api/sdr/fm/stations, /api/sdr/sondehub/status
+
 
 Partial code published for continued development. Known issues: STATUS.md.
 

@@ -3,7 +3,7 @@
 > Work in progress. This checkpoint may be incomplete or fail tests. See PLAN.md and STATUS.md before use.
 
 
-Current version: `1.6.0`.
+Current version: `1.7.0`.
 
 Axiom Studio addresses the challenge of analyzing disparate real-world spatial sensor feeds in real time without proprietary software stacks or prohibitive hardware overhead. By unifying Keplerian orbital satellite propagation, ADS-B commercial flight kinematic vectors, ground-based radio frequency (RF) monitors, and public traffic camera feeds with automated health polling onto an interactive 3D globe simulator, the system provides analysts and researchers with an open-source spatial intelligence operating picture. A deterministic machine learning trajectory anomaly engine evaluates anomalous maneuvers, emergency descents, and transponder spoofing across multi-source spatio-temporal streams, while a deterministic workflow synthesis engine compiles repeated analyst routines into verifiable shortcuts.
 
@@ -134,6 +134,26 @@ Axiom Studio uses Keycloak for OpenID Connect (OIDC) authorization-code authenti
 
 ---
 
+## Hardware SDR and SondeHub Integration
+
+Local USB WebUSB/WebAudio SDR receiver direct streaming for ADS-B and FM broadcast, with direct SondeHub radiosonde telemetry layer and balloon flight prediction vectors.
+
+### API Endpoints
+
+- `GET /api/sdr/config` — Get current SDR receiver settings (frequency, gain, mode, sample rate)
+- `POST /api/sdr/start` — Start local SDR receiver direct streaming for ADS-B and FM broadcast
+- `POST /api/sdr/stop` — Stop the SDR receiver streaming
+- `POST /api/sdr/set-frequency` — Set the SDR receiver tuning frequency in MHz
+- `POST /api/sdr/set-mode` — Set the SDR reception mode (fm, am, DSB, WFM)
+- `GET /api/sdr/ads-b/aircraft` — Retrieve ADS-B decoded aircraft positions from SDR stream
+- `GET /api/sdr/fm/stations` — Retrieve FM broadcast station listings from SDR scan
+- `GET /api/sdr/sondehub/status` — Check SondeHub radio connection and telemetry feed status
+
+### Capabilities
+
+- **ADS-B Reception**: Decodes 1090 MHz aircraft transponder signals for real-time aircraft position tracking
+- **FM Broadcast Scan**: Scans the FM broadcast band (87.5-108 MHz) for active stations with signal strength
+- **SondeHub Integration**: Provides radiosonde telemetry including balloon altitude, position, and flight prediction vectors with estimated landing zone
 ## Security Limitations
 
 - **Localhost Binding**: Development ports bind exclusively to `127.0.0.1` to prevent unauthorized external access.
